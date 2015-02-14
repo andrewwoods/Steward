@@ -4,14 +4,41 @@
   <meta charset="utf-8">
   <title>Steward</title>
   <link rel="stylesheet" href="qunit/qunit-1.17.1.css">
+	<style type="text/css">
+		.is_hidden {
+			display: none;
+		}
+    </style>
   <script src="steward.js"></script>
+  <script>
+document.addEventListener("DOMContentLoaded", function(event) {
+	// do work
+	console.log( 'Ready' );
+
+	/*
+	@todo
+	*/
+	Steward.add_class( '', 'is_hidden' );
+
+});
+  </script>
 </head>
 <body>
 	<h1>Sample Page</h1>
 	<nav> 
 	<form name="steward" action="" method="post" accept-charset="utf-8">
-		<input type="search" id="search-input" name="q" value=""> 	
-		<input type="submit" id="submit-button" name="button_submit" value="Go!"> 
+		<div>
+		<input type="search" id="search-input" name="q" value="">
+		<input type="submit" id="submit-button" name="button_submit" value="Go!">
+		</div>
+		<div id="steward_display" class="is_hidden">
+			<strong>Help</strong>
+			<p>This is how to use it<p>
+			<ul>
+			<li>try common words: home, about - to go directly to the page</li>
+			<li>the default will search the site using google</li>
+			</ul>
+		</div>
 	</form>
 	</nav>
 
