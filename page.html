@@ -8,20 +8,51 @@
 		.is_hidden {
 			display: none;
 		}
+		form {
+			background-color: #909090;
+			color: #ffffff;
+			border: 3px solid #9f0000;
+			width: 30em;
+			padding: 1em;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		input {
+			font-size: 24px;
+			line-height: 1.5;
+			padding: 2em;
+		}
+		.meta {
+			display: block;
+			font-style: italic;
+		}
 	</style>
-	script src="steward.js"></script>
+	<script src="steward.js"></script>
 	<script>
+
 	document.addEventListener( "DOMContentLoaded", function( event ) {
 
-	/*
-	@todo
-	*/
-	Steward.add_class( '', 'is_hidden' );
+		var menu_data = [
+			{title: 'Home', url: '/', type: 'page'},
+			{title: 'About', url: '/about-us', type: 'page'},
+			{title: 'Contact', url: '/contact', type: 'page'},
+			{title: 'Journal', url: '/sections/journal', type: 'category'},
+			{title: 'Articles', url: '/sections/articles', type: 'category'},
+			{title: 'Projects', url: '/sections/articles', type: 'category'},
+		];
+
+		Steward.load( menu_data );
+
+		var help_el = document.getElementById( 'steward_help' );
+		Steward.add_class( help_el, 'is_hidden' );
 
 		var results_el = document.getElementById( 'steward_results' );
+		var input_el = document.getElementById( 'search-input' );
 
-		Steward.add_class( results_el, 'is_hidden' );
+		input_el.addEventListener( 'keypress', Steward.parse_input  );
 	});
+
 	</script>
 </head>
 <body>
@@ -32,7 +63,9 @@
 		<input type="search" id="search-input" name="q" value="">
 		<input type="submit" id="submit-button" name="button_submit" value="Go!">
 		</div>
-		<div id="steward_display" class="is_hidden">
+		<div id="steward_results">
+		</div>
+		<div id="steward_help">
 			<strong>Help</strong>
 			<p>This is how to use it<p>
 			<ul>

@@ -4,6 +4,8 @@
 var Steward = {
 	version: '0.1',
 	data: null,
+	input_id: 'search_input',
+	q: '',
 
 	load: function( data ){
 		Steward.data = data;
@@ -22,7 +24,7 @@ var Steward = {
 		if ( el.classList ) {
 			return el.classList.contains( className );
 		} else {
-			return new RegExp('(^| )' + className + '( |$)', 'gi').test( el.className );	
+			return new RegExp('(^| )' + className + '( |$)', 'gi').test( el.className );
 		}
 	},
 
@@ -50,7 +52,40 @@ var Steward = {
 
 			el.className = classes.join( ' ' );
 		}
-	}
-};
+	},
 
+	parse_input: function( event ){
+
+		Steward.q += String.fromCharCode( event.keyCode );
+		console.log( Steward.q );
+
+		var results_html = '<ul>';
+		var item = null;
+		for ( i = 0; i < Steward.data.length; i++ ) {
+			item = Steward.data[ i ];
+			var meta = '';
+
+			console.log( item.title );
+			if ( item.title.toLowerCase().indexOf( Steward.q.toLowerCase() ) !== -1 ) {
+				results_html += '<li>';
+				results_html += '<a>' + item.title + '</a>';
+				if ( item.type == 'page' ) {
+					meta = item.url;
+				} else {
+					meta = item.type;
+				}
+
+				results_html += '<span class="meta">' + meta + '</span>';
+				results_html += '</li>';
+			}
+
+		}
+		results_html += '</ul>';
+
+		var results_el = document.getElementById( 'steward_results' );
+		results_el.innerHTML = results_html;
+		Steward.remove_class( results_el,  'is_hidden' );
+	}
+
+};
 
