@@ -4,17 +4,19 @@ QUnit.test( "Version Check", function( assert ) {
 
 
 QUnit.test( "load - check first item", function( assert ) {
-	var test_data = {
-		menu: [
-			{title: 'Home', url: '/'},
-			{title: 'About', url: '/about-us'},
-			{title: 'Contact', url: '/contact'},
-		]
-	};
+	var test_data = [
+		{title: 'Home', url: '/', type: 'page'},
+		{title: 'About', url: '/about-us', type: 'page'},
+		{title: 'Contact', url: '/contact', type: 'page'},
+		{title: 'Journal', url: '/sections/journal', type: 'category'},
+		{title: 'Articles', url: '/sections/articles', type: 'category'},
+		{title: 'Projects', url: '/sections/articles', type: 'category'},
+	];
 
 	Steward.load( test_data );
-	assert.ok( Steward.data.menu[0].title == "Home", "Passed!" );
-	assert.ok( Steward.data.menu[0].url == "/", "Passed!" );
+	assert.ok( Steward.data[0].title == "Home", "Passed!" );
+	assert.ok( Steward.data[0].url == "/", "Passed!" );
+	assert.ok( Steward.data[0].url == "/", "page" );
 });
 
 QUnit.test( "Change class", function( assert ) {
@@ -35,7 +37,6 @@ QUnit.test( "Change class", function( assert ) {
 
 	Steward.remove_class( div, test_class );
 	assert.ok( Steward.has_class( div, test_class )  === false, "Class Removed!" );
-
 
 });
 
