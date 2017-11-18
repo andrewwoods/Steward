@@ -9,23 +9,67 @@
 			display: none;
 		}
 		form {
-			background-color: #909090;
-			color: #ffffff;
-			border: 3px solid #9f0000;
+			background-color: #fce7bd;
+			color: #2a2a2a;
+			border: 3px solid #fcbf07;
 			width: 30em;
 			padding: 1em;
 			margin-left: auto;
 			margin-right: auto;
 		}
 
-		input {
+		label {
+			font-weight: bold;
+		}
+
+		input, button {
 			font-size: 24px;
 			line-height: 1.5;
-			padding: 2em;
+			padding: 0.5em;
 		}
+
 		.meta {
 			display: block;
 			font-style: italic;
+		}
+
+		.examples {
+			margin-block-start: 0.5em;
+		}
+
+		.steward-results {
+			border: 1px solid #efefef;
+			background-color: e0e0e0;
+				color: #2a2a2a;
+		}
+
+		.steward-results ul {
+			list-style-type: none;
+
+			margin: 0;
+			padding: 0;
+		}
+
+		.steward-results li {
+			background-color: #e6e6e6;
+				color: #3a3a3a;
+		}
+
+		.steward-results li:nth-child(even) {
+			background-color: #fefefe;
+		}
+
+		.steward-results a {
+			color: #3a3a3a;
+			display: block;
+			padding: 0.5em;
+			text-decoration: none;
+		}
+
+		.steward-results a:hover {
+			background-color: #00a0ee;
+			color: #f0f0f0;
+			color: #efefef
 		}
 	</style>
 	<script src="steward.js"></script>
@@ -39,7 +83,7 @@
 			{title: 'Contact', url: '/contact', type: 'page'},
 			{title: 'Journal', url: '/sections/journal', type: 'category'},
 			{title: 'Articles', url: '/sections/articles', type: 'category'},
-			{title: 'Projects', url: '/sections/articles', type: 'category'},
+			{title: 'Projects', url: '/sections/projects', type: 'category'},
 		];
 
 		Steward.load( menu_data );
@@ -59,19 +103,30 @@
 	<h1>Sample Page</h1>
 	<nav>
 	<form name="steward" action="" method="post" accept-charset="utf-8">
-		<div>
-		<input type="search" id="search-input" name="q" value="">
-		<input type="submit" id="submit-button" name="button_submit" value="Go!">
-		</div>
-		<div id="steward_results">
-		</div>
 		<div id="steward_help">
-			<strong>Help</strong>
-			<p>This is how to use it<p>
-			<ul>
-			<li>try common words: home, about - to go directly to the page</li>
-			<li>the default will search the site using google</li>
-			</ul>
+			<h2>Nav Help</h2>
+            <p>Start by trying common words: home, about - to go directly to
+            the page.  If no matches are available, you can perform a site
+            search</p>
+        </div>
+		<div>
+            <label for="search-input">Main Nav and Search</label>
+            <div>
+                <input  id="search-input" type="text" name="q" value="" placeholder="e.g. about, contact, articles">
+				<p class="examples">Try the following: about, contact, articles</p>
+            </div>
+            <button type="reset">Clear</button>
+            <button type="button" id="submit-button" name="button_submit">
+                Search Site
+            </button>
+		</div>
+		<div id="steward_results" class="steward-results" >
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/articles/">Articles</a></li>
+            </ul>
 		</div>
 	</form>
 	</nav>
